@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sec_9_qrreader/models/models.dart';
 import 'package:sec_9_qrreader/services/scan_list_provider.dart';
+import 'package:sec_9_qrreader/utils/url_launcher.dart';
 
 class CustomScanTile extends StatelessWidget {
   const CustomScanTile({
@@ -25,6 +27,12 @@ class CustomScanTile extends StatelessWidget {
         Provider.of<ScanListProvider>(context, listen: false)
             .deleteScanById(id);
 
+    onTapListTile(BuildContext context, ScanModel scanModel) {
+      // if (scanModel.type == 'geo') return;
+
+      customLaunchUrl(context, scanModel.value);
+    }
+
     return ListView.builder(
       itemCount: scanList.length,
       itemBuilder: (_, index) {
@@ -38,7 +46,7 @@ class CustomScanTile extends StatelessWidget {
             subtitle: Text('id: ${scanList[index].id}'),
             trailing: iconTrailing,
             // ignore: avoid_print
-            onTap: () => print(scanList[index].type),
+            onTap: () => onTapListTile(context, scanList[index]),
           ),
         );
       },

@@ -18,10 +18,12 @@ class HomeBody extends StatelessWidget {
     switch (currenIndex) {
       case 0:
         scanList.loadScansByType('geo');
+        // return const CustomScanTile(type: 'geo');
         return const HistoryMaps();
 
       case 1:
         scanList.loadScansByType('http');
+        // return const CustomScanTile(type: 'http');
         return const Directions();
 
       default:
